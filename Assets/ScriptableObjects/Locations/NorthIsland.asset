@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643cfcc40a77fda43bf908c15f304e48, type: 3}
+  m_Name: NorthIsland
+  m_EditorClassIdentifier: 
+  LocationName: 1
+  LocationScenes:
+  - coordinates: {x: 4, y: 4}
+    scene:
+      m_AssetGUID: 02bedcf9712a55c48b1146c7a7a62c79
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 4, y: 5}
+    scene:
+      m_AssetGUID: 6bf2fb2f1b15e994b8736bf531edde3d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 4, y: 6}
+    scene:
+      m_AssetGUID: 6699edf80d3b2be4595bd5e0ed5f6110
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 5, y: 4}
+    scene:
+      m_AssetGUID: dbd9b013d55b42342af4ae92156c6da9
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 5, y: 5}
+    scene:
+      m_AssetGUID: 4593c0a83ee93ae41a5d3ab8fe492d28
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 5, y: 6}
+    scene:
+      m_AssetGUID: 59199bfd8a87a4748be51a11a42114b9
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 6, y: 4}
+    scene:
+      m_AssetGUID: 7b140661cb42b7e4895cfa9431b837b8
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 6, y: 5}
+    scene:
+      m_AssetGUID: 3821d0a6e60ba7e4fb226061cda2a02d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - coordinates: {x: 6, y: 6}
+    scene:
+      m_AssetGUID: 76ab20b19e188c94aabf24850dc4a3f4
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
