@@ -15,9 +15,6 @@ namespace Assets.Scripts.GameLogic
         [SerializeField] private Location playerLocation;
         [SerializeField] private Vector3 playerPosition;
 
-        [field: Header("Controllers")]
-        [SerializeField] private PlayerSceneController playerSceneController;
-
         #endregion
 
         #region Unity Methods
@@ -37,31 +34,38 @@ namespace Assets.Scripts.GameLogic
 
             PlayerData playerData = new PlayerData(playerLocation, playerPosition);
 
-            await LoadInitialScene(playerData);
+            SceneManager sceneManager = new SceneManager();
+            await LoadInitialScene(playerData, sceneManager);
 
-            SpawnPlayer(playerData);
+            SpawnPlayer(playerData, ref sceneManager);
         }
 
-        private async Task<bool> LoadInitialScene(PlayerData playerData)
+        private async Task<bool> LoadInitialScene(PlayerData playerData, SceneManager sceneManager)
         {
-            playerSceneController.sceneManager = new SceneManager();
-            playerSceneController.sceneManager.LoadScene(playerData.Location, playerData.SceneCoords);
+            sceneManager.LoadScene(playerData.Location, playerData.SceneCoords);
 
-            while (playerSceneController.sceneManager.CurrentLoadedScenes.Count <= 0)
+            while (sceneManager.CurrentLoadedScenes.Count <= 0)
                 await Task.Yield();
 
             return true;
         }
 
-        private void SpawnPlayer(PlayerData playerData)
+        private void SpawnPlayer(PlayerData playerData, ref SceneManager sceneManager)
         {
             GameObject player = Instantiate(playerPrefab);
             player.transform.position = playerData.Position;
 
-            WorldPositionController worldPositionController = player.GetComponent<WorldPositionController>();
+            if (player.TryGetComponent(out WorldPositionController worldPositionController))
+            {
+                worldPositionController.Location = playerData.Location;
+            }
+            else
+            {
+                player.AddComponent<WorldPositionController>().Location = playerData.Location;
+            }
 
-            worldPositionController.Location = playerData.Location;
-            playerSceneController.PlayerWorldPositionController = worldPositionController;
+            var sceneLoaderController = SceneLoaderController.CreateComponentWithSceneManager(player, sceneManager);
+            worldPositionController.sceneLoaderController = sceneLoaderController;
         }
 
         #endregion

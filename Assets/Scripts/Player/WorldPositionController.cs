@@ -9,8 +9,7 @@ namespace Assets.Scripts.Player
     {
         #region Variables
 
-        private const float MinCornerThreshold = 0.25f;
-        private const float MaxCornerThreshold = 0.75f;
+        internal SceneLoaderController sceneLoaderController;
 
         #endregion
 
@@ -43,18 +42,27 @@ namespace Assets.Scripts.Player
                     PosZOnCurrentSceneInPercent = PosZOnCurrentScene / (float)GameSettings.TERRAIN_LENGTH;
                 }
 
+                var isObjectInSceneCorner = IsObjectInSceneCorner(PosXOnCurrentSceneInPercent, PosZOnCurrentSceneInPercent);
+
+                sceneLoaderController?.CheckForSceneToLoad(Location, SceneCoords, isObjectInSceneCorner, 
+                                                           PosXOnCurrentSceneInPercent, PosZOnCurrentSceneInPercent);
+                sceneLoaderController?.CheckForSceneToUnload(SceneCoords);
+
                 transform.hasChanged = false;
             }
         }
 
         #endregion
 
-        #region Public Methods
+        #region Private Methods
 
-        public bool IsObjectInSceneCorner(float posXOnCurrentSceneInPercent, float posZOnCurrentSceneInPercent)
+        private bool IsObjectInSceneCorner(float posXOnCurrentSceneInPercent, float posZOnCurrentSceneInPercent)
         {
-            bool isXInCorner = posXOnCurrentSceneInPercent <= MinCornerThreshold || posXOnCurrentSceneInPercent >= MaxCornerThreshold;
-            bool isZInCorner = posZOnCurrentSceneInPercent <= MinCornerThreshold || posZOnCurrentSceneInPercent >= MaxCornerThreshold;
+            bool isXInCorner = posXOnCurrentSceneInPercent <= GameSettings.LOW_THRESHOLD_TO_SCENE_LOAD || 
+                               posXOnCurrentSceneInPercent >= GameSettings.HIGH_THRESHOLD_TO_SCENE_LOAD;
+
+            bool isZInCorner = posZOnCurrentSceneInPercent <= GameSettings.LOW_THRESHOLD_TO_SCENE_LOAD || 
+                               posZOnCurrentSceneInPercent >= GameSettings.HIGH_THRESHOLD_TO_SCENE_LOAD;
 
             return isXInCorner && isZInCorner;
         }
